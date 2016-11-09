@@ -63,7 +63,12 @@ def str2float2(s):
     def char2int(c):
         return {'0':0,'1':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9}[c]
 
-    di = s.index('.');
+    try:
+        #*不含有.时，会报错（为整数时）*#
+        di = s.index('.');
+    except Exception:
+        di = len(s);        
+    
     l = s[0:di]+s[di+1:];
     i = reduce(lambda x,y:x*10+y, map(char2int,l));
 
@@ -78,4 +83,4 @@ print('0123.456 =',str2float2('0123.456'))
 print('123.456 =',str2float2('123.456'))
 print('0.456 =',str2float2('0.456'))
 print('123. =',str2float2('123.'))
-
+print('1234 =',str2float2('1234'))
